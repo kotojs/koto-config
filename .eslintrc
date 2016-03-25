@@ -1,18 +1,19 @@
 {
-  "extends": "airbnb/base",
-  "env": {
-    "mocha": true
-  },
-  "rules": {
-    "no-param-reassign": [2, {"props": false}],
-    "comma-dangle": [0, "always-multiline"],
-    "no-use-before-define": [2, "nofunc"]
-  },
-  "globals": {
-    "ON_DEV": false,
-    "ON_TEST": false,
-    "ON_PROD": false,
-    "sinon": false,
-    "expect": false
-  }
+    "extends": "airbnb/base",
+    "parser": "babel-eslint",
+    "env": {
+      "mocha": true
+    },
+    "rules": {
+      "no-param-reassign": [2, {"props": false}],
+      "comma-dangle": [0, "always-multiline"],
+      "no-use-before-define": [2, "nofunc"]
+    },
+    "globals": {
+      "ON_DEV": false,
+      "ON_TEST": false,
+      "ON_PROD": false,
+      "sinon": false,
+      "expect": false
+    }
 }
