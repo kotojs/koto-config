@@ -8,12 +8,12 @@ This is an optional decorator for KotoJS charts that allows chart authors to spe
 ```js
 // JSON SCHEMA
 const schema = {
-  type: 'object',
-  properties: {
-    height: {
-      type: 'number',
-      minimum: 500
-    }
+  height: {
+    type: 'number',
+    minimum: 500
+  },
+  fill: {
+    type: 'color'
   }
 };
 
@@ -32,6 +32,7 @@ class Chart extends Koto {
 
 const chart = new Chart(d3.select(document.body));
 chart.config('height', 400); // => throws Error
+chart.config('fill', 'steelblue'); // valid
 ```
 ## Repo Usage
 - `$ npm start` to run webpack-dev-server
