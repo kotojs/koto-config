@@ -1,6 +1,6 @@
 {
   "name": "koto-config",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A basic starter template for building reusable modules",
   "main": "./dist/bundle.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "preversion": "npm run eslint && npm test",
     "version": "npm run build && npm run changelog && git add -A dist",
     "postversion": "git push && git push --tags",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
+    "changelog": "./node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
   },
   "repository": {},
   "bugs": {},
@@ -33,6 +33,7 @@
     "babel-preset-stage-1": "^6.1.18",
     "babel-runtime": "^6.2.0",
     "chai": "^3.3.0",
+    "conventional-changelog-cli": "^1.1.1",
     "coveralls": "^2.11.1",
     "eslint": "^2.4.0",
     "eslint-config-airbnb": "^6.2.0",
