@@ -43,7 +43,7 @@ module.exports = kotoConfig => {
     });
 
     it('should pass on valid custom type (color)', () => {
-      expect(() => chart.config('fill', '#fff')).to.throw(Error);
+      expect(() => chart.config('fill', 'white')).to.throw(Error);
     });
   });
 };
