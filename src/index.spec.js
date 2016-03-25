@@ -2,18 +2,15 @@ module.exports = kotoConfig => {
   const d3 = require('d3');
   const Koto = require('koto');
   describe('kotoConifg', () => {
-    it('should exist', () => {
-      expect(kotoConfig).to.not.equal(undefined);
-    });
-
-    it('should decorate a Koto class', () => {
+    var chart;
+    beforeEach(() => {
       const schema = {
-        type: 'object',
-        properties: {
-          height: {
-            type: 'number',
-            minimum: 500
-          }
+        height: {
+          type: 'number',
+          minimum: 500
+        },
+        fill: {
+          type: 'color'
         }
       };
 
@@ -30,8 +27,23 @@ module.exports = kotoConfig => {
         }
       }
 
-      const chart = new Chart(d3.select(document.body));
+      chart = new Chart(d3.select(document.body));
+    });
+
+    it('should exist', () => {
+      expect(kotoConfig).to.not.equal(undefined);
+    });
+
+    it('should throw error on invalid number', () => {
       expect(() => chart.config('height', 400)).to.throw(Error);
+    });
+
+    it('should throw error on invalid custom type (color)', () => {
+      expect(() => chart.config('fill', 'no-a-color')).to.throw(Error);
+    });
+
+    it('should pass on valid custom type (color)', () => {
+      expect(() => chart.config('fill', '#fff')).to.throw(Error);
     });
   });
 };

@@ -29,6 +29,7 @@ const config = {
       ON_TEST: process.env.NODE_ENV === 'test',
       ON_PROD: process.env.NODE_ENV === 'production',
     }),
+    new webpack.IgnorePlugin(/regenerator|nodent|js\-beautify/, /ajv/),
   ],
 
   module: {
