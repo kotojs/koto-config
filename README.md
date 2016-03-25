@@ -10,30 +10,56 @@ This is an optional decorator for KotoJS charts that allows chart authors to spe
 const schema = {
   height: {
     type: 'number',
-    minimum: 500
+    minimum: 500,
+    default: 500
   },
   fill: {
-    type: 'color'
+    type: 'color',
+    default: '#fff'
   }
 };
 
 @KotoConfig(schema)
 class Chart extends Koto {
-  constructor(selection) {
-    super(selection);
-    this.configs = {
-      height: { value: 500 }
-    };
-  }
   preDraw() {
     console.log('predraw');
   }
 }
 
 const chart = new Chart(d3.select(document.body));
-chart.config('height', 400); // => throws Error
+chart.config('height', 400); // => throws Error with message
 chart.config('fill', 'steelblue'); // valid
 ```
+
+## Vaidation types
+- boolean
+- number
+  - minimum
+  - maximum
+- integer
+  - minimum
+  - maximum
+- string
+  - in
+- array
+  - items
+- color
+- scale
+
+### Coming soon
+- Object
+  - properties
+  - required
+- number
+  - multipleOf
+- array
+  - minLength
+  - maxLength
+- string
+  - pattern
+  - minLength
+  - maxLength
+
 ## Repo Usage
 - `$ npm start` to run webpack-dev-server
 - `$ npm test` to run unit tests

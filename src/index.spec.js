@@ -6,22 +6,38 @@ module.exports = kotoConfig => {
     beforeEach(() => {
       const schema = {
         height: {
-          type: 'number',
-          minimum: 500
+          type: 'integer',
+          minimum: 500,
+          default: 500
         },
         fill: {
-          type: 'color'
+          type: 'color',
+          default: 'steelblue'
+        },
+        orientation: {
+          type: 'string',
+          in: ['horizontal', 'vertical'],
+          default: 'vertical'
+        },
+        xScale: {
+          type: 'scale',
+          default: d3.scale.linear()
+        },
+        buckets: {
+          type: 'array',
+          items: {
+            type: 'string'
+          },
+          default: ['hello', 'world']
+        },
+        showLegend: {
+          type: 'boolean',
+          default: false
         }
       };
 
       @kotoConfig(schema)
       class Chart extends Koto {
-        constructor(selection) {
-          super(selection);
-          this.configs = {
-            height: { value: 100 }
-          };
-        }
         preDraw() {
           // do something
         }
@@ -43,7 +59,23 @@ module.exports = kotoConfig => {
     });
 
     it('should pass on valid custom type (color)', () => {
-      expect(() => chart.config('fill', 'white')).to.throw(Error);
+      expect(() => chart.config('fill', 'white')).to.not.throw(Error);
+    });
+
+    it('should pass on valid custom type (scale)', () => {
+      expect(() => chart.config('xScale', d3.scale.linear())).to.not.throw(Error);
+    });
+
+    it('should pass on valid custom type (string)', () => {
+      expect(() => chart.config('orientation', 'wrong')).to.throw(Error);
+    });
+
+    it('should pass on valid custom type (array)', () => {
+      expect(() => chart.config('buckets', [1337])).to.throw(Error);
+    });
+
+    it('should pass on valid custom type (boolean)', () => {
+      expect(() => chart.config('showLegend', true)).to.not.throw(Error);
     });
   });
 };
