@@ -193,7 +193,8 @@ function KotoConfig(schema) {
         }
 
         // TODO: handle errors
-        throw Error('invald config');
+        // console.log(`${name} config ${ajv.errorsText()}`);
+        throw Error(`${name} config ${ajv.errorsText()}`);
       } else {
         return proxyConfig.call(this, name, value);
       }
