@@ -6,17 +6,17 @@ function KotoConfig(schema) {
   // I took this code right from d3js
   ajv.addKeyword('color', {
     type: 'string',
-    validate: function validateColor(schema, format) {
-      var reHex3 = /^#([0-9a-f]{3})$/,
-      reHex6 = /^#([0-9a-f]{6})$/,
-      reRgbInteger = /^rgb\(\s*([-+]?\d+)\s*,\s*([-+]?\d+)\s*,\s*([-+]?\d+)\s*\)$/,
-      reRgbPercent = /^rgb\(\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*\)$/,
-      reRgbaInteger = /^rgba\(\s*([-+]?\d+)\s*,\s*([-+]?\d+)\s*,\s*([-+]?\d+)\s*,\s*([-+]?\d+(?:\.\d+)?)\s*\)$/,
-      reRgbaPercent = /^rgba\(\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)\s*\)$/,
-      reHslPercent = /^hsl\(\s*([-+]?\d+(?:\.\d+)?)\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*\)$/,
-      reHslaPercent = /^hsla\(\s*([-+]?\d+(?:\.\d+)?)\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)\s*\)$/;
+    validate: function validateColor(s, data) {
+      const reHex3 = /^#([0-9a-f]{3})$/;
+      const reHex6 = /^#([0-9a-f]{6})$/;
+      const reRgbInteger = /^rgb\(\s*([-+]?\d+)\s*,\s*([-+]?\d+)\s*,\s*([-+]?\d+)\s*\)$/;
+      const reRgbPercent = /^rgb\(\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*\)$/;
+      const reRgbaInteger = /^rgba\(\s*([-+]?\d+)\s*,\s*([-+]?\d+)\s*,\s*([-+]?\d+)\s*,\s*([-+]?\d+(?:\.\d+)?)\s*\)$/;
+      const reRgbaPercent = /^rgba\(\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)\s*\)$/;
+      const reHslPercent = /^hsl\(\s*([-+]?\d+(?:\.\d+)?)\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*\)$/;
+      const reHslaPercent = /^hsla\(\s*([-+]?\d+(?:\.\d+)?)\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)%\s*,\s*([-+]?\d+(?:\.\d+)?)\s*\)$/;
 
-      var named = [
+      const named = [
         'aliceblue',
         'antiquewhite',
         'aqua',
@@ -167,18 +167,17 @@ function KotoConfig(schema) {
         'yellowgreen'
       ];
 
-      format = (format + "").trim().toLowerCase();
-      return (reHex3.exec(format)) ? true
-        : (reHex6.exec(format)) ? true
-        : (reRgbInteger.exec(format)) ? true
-        : (reRgbPercent.exec(format)) ? true
-        : (reRgbaInteger.exec(format)) ? true
-        : (reRgbaPercent.exec(format)) ? true
-        : (reHslPercent.exec(format)) ? true
-        : (reHslaPercent.exec(format)) ? true
-        : named.indexOf(format) >= 0 ? true
-        : format === "transparent" ? true
-        : false;
+      const format = (String(data)).trim().toLowerCase();
+      return (reHex3.exec(format))
+      || (reHex6.exec(format))
+      || (reRgbInteger.exec(format))
+      || (reRgbPercent.exec(format))
+      || (reRgbaInteger.exec(format))
+      || (reRgbaPercent.exec(format))
+      || (reHslPercent.exec(format))
+      || (reHslaPercent.exec(format))
+      || named.indexOf(format) >= 0
+      || format === 'transparent';
     }
   });
 
@@ -188,7 +187,7 @@ function KotoConfig(schema) {
     const proxyConfig = target.prototype.config;
     target.prototype.config = function proxy(name, value) {
       if (schema.hasOwnProperty(name)) {
-        const valid = ajv.validate(schema[name], value );
+        const valid = ajv.validate(schema[name], value);
         if (valid) {
           return proxyConfig.call(this, name, value);
         }
