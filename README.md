@@ -1,4 +1,5 @@
 # Koto Config (WIP)
+[![Build Status](https://travis-ci.org/kotojs/koto-config.svg?branch=master)](https://travis-ci.org/kotojs/koto-config)
 This is an optional decorator for KotoJS charts that allows chart authors to specify a validation schema (using JSON-SCHEMA). Attempting to set a property that is not valid will throw an Error.
 
 ## Example Usage
