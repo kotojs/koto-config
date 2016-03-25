@@ -1,4 +1,2 @@
 service_name: travis-ci
-
-# do not forget to add env variable to your build server if it is not travis-ci
-# COVERALLS_REPO_TOKEN=asdfasdf
+repo_token: hu5K2OGNZbH5NZJUrwPhGCdl9J2p3FOeN
