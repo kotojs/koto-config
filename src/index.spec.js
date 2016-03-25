@@ -2,7 +2,7 @@ module.exports = kotoConfig => {
   const d3 = require('d3');
   const Koto = require('koto');
   describe('kotoConifg', () => {
-    var chart;
+    let chart;
     beforeEach(() => {
       const schema = {
         height: {
