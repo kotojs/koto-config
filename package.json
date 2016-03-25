@@ -1,6 +1,6 @@
 {
   "name": "koto-config",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A basic starter template for building reusable modules",
   "main": "./dist/bundle.js",
   "scripts": {
