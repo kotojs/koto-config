@@ -1,11 +1,12 @@
-module.exports = KotoConfig => {
-  var Koto = require('koto');
+module.exports = kotoConfig => {
+  const d3 = require('d3');
+  const Koto = require('koto');
   describe('kotoConifg', () => {
     it('should exist', () => {
-      expect(KotoConfig).to.not.equal(undefined);
+      expect(kotoConfig).to.not.equal(undefined);
     });
 
-    it('should decorate a Koto class', function() {
+    it('should decorate a Koto class', () => {
       const schema = {
         type: 'object',
         properties: {
@@ -16,7 +17,7 @@ module.exports = KotoConfig => {
         }
       };
 
-      @KotoConfig(schema)
+      @kotoConfig(schema)
       class Chart extends Koto {
         constructor(selection) {
           super(selection);
@@ -25,7 +26,7 @@ module.exports = KotoConfig => {
           };
         }
         preDraw() {
-          console.log('predraw');
+          // do something
         }
       }
 
